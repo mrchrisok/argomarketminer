@@ -1,7 +1,7 @@
 {
     "name": "argomarketminer",
     "description": "TypeScript/HTML5 interface for the OANDA platform",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "main": "./main.js",
     "bin": {
         "argomarketminer": "./bin/argomarketminer",
