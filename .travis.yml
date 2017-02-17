@@ -3,7 +3,7 @@ node_js:
     - node
 
 notifications:
-    email: false
+    email: true
 
 sudo: required
 dist: trusty
