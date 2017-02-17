@@ -1,0 +1,13 @@
+site_name: ArgoMarketMiner
+site_url: http://argo.js.org/
+site_description: ArgoMarketMiner is a TypeScript implementation of Alberto Santini's Argo.
+site_author: O. Chris Okonkwo
+site_favicon: favicon.ico
+
+repo_url: https://github.com/mrchrisok/argomarketminer
+
+theme: readthedocs
+repo_name: GitHub
+
+extra_javascript:
+  - extra/extra.js

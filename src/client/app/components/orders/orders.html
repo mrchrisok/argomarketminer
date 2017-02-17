@@ -1,0 +1,39 @@
+<div ng-show="$ctrl.orders.length" layout="row" layout-align="space-around center">
+    <b flex="5">Type</b>
+    <b flex="10">Ticket</b>
+    <b flex="10">Market</b>
+    <b flex="5">Units</b>
+    <b flex="5">S/L</b>
+    <b flex="5">T/P</b>
+    <b flex="5">T/S</b>
+    <b flex="10">Price</b>
+    <b flex="10">Current</b>
+    <b flex="5">Distance</b>
+    <b flex="20">Expiry</b>
+</div>
+
+<md-content>
+
+    <md-card ng-repeat="order in $ctrl.orders">
+
+        <div layout="row" layout-align="space-around center">
+            <span flex="5">{{ order.side }}</span>
+            <a flex="10" href="" ng-click="$ctrl.closeOrder($event, order.id)">{{ order.id }}</a>
+            <span flex="10">{{ order.instrument }}</span>
+            <span flex="5">{{ order.units | number }}</span>
+            <span flex="5">{{ order.stopLossOnFill.price || order.type }}</span>
+            <span flex="5">{{ order.takeProfitOnFill.price }}</span>
+            <span flex="5">{{ order.trailingStopLossOnFill.distance || order.trailingStopValue }}</span>
+            <span flex="10">{{ order.price | number:4 }}</span>
+            <span flex="10">{{ order.current | number:4 }}</span>
+            <span flex="5">{{ order.distance | number:1 }}</span>
+            <span flex="20">{{ order.expiry | date:"MMM d, HH:mm" }}</span>
+        </div>
+
+    </md-card>
+
+    <md-card ng-show="!$ctrl.orders.length">
+        No orders.
+    </md-card>
+
+</md-content>

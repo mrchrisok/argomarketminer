@@ -1,0 +1,46 @@
+<md-content ng-show="$ctrl.account.id">
+    <b>Account Summary ({{ $ctrl.account.currency }}) {{ $ctrl.account.timestamp | date:"MMM d, HH:mm:ss" }}</b>
+
+    <md-list layout="column">
+        <md-item layout="row" layout-align="space-between end">
+            <b>Balance</b>
+            <span>{{ $ctrl.account.balance | number: 2}}</span>
+        </md-item>
+        <md-item layout="row" layout-align="space-between end">
+            <b>Unrealized P&amp;L</b>
+            <span>{{ $ctrl.account.unrealizedPL | number: 2 }}</span>
+        </md-item>
+        <md-item layout="row" layout-align="space-between end">
+            <b>Unrealized P&amp;L (%)</b>
+            <span>{{ $ctrl.account.unrealizedPLPercent | number: 2 }}</span>
+        </md-item>
+        <md-item layout="row" layout-align="space-between end">
+            <b>Net Asset Value</b>
+            <span>{{ $ctrl.account.NAV | number: 2 }}</span>
+        </md-item>
+        <md-item layout="row" layout-align="space-between end">
+            <b>Realized P&amp;L</b>
+            <span>{{ $ctrl.account.pl | number: 2 }}</span>
+        </md-item>
+        <md-item layout="row" layout-align="space-between end">
+            <b>Margin Used</b>
+            <span>{{ $ctrl.account.marginCallMarginUsed | number: 2 }}</span>
+        </md-item>
+        <md-item layout="row" layout-align="space-between end">
+            <b>Margin Available</b>
+            <span>{{ $ctrl.account.marginAvailable | number: 2 }}</span>
+        </md-item>
+        <md-item layout="row" layout-align="space-between end">
+            <b>Margin Closeout Value</b>
+            <span>{{ $ctrl.account.marginCloseoutPositionValue | number: 2 }}</span>
+        </md-item>
+        <md-item layout="row" layout-align="space-between end">
+            <b>Margin Closeout Value (%)</b>
+            <span>{{ $ctrl.account.marginCloseoutPercent | number: 2 }}</span>
+        </md-item>
+        <md-item layout="row" layout-align="space-between end">
+            <b>Position Value</b>
+            <span>{{ $ctrl.account.positionValue | number: 2 }}</span>
+        </md-item>
+    </md-list>
+</md-content>

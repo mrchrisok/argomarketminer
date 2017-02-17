@@ -1,0 +1,94 @@
+<header></header>
+
+<md-tabs class="md-accent" md-dynamic-height md-center-tabs md-whiteframe="1"
+    md-selected="$ctrl.tabSelectedIndex">
+    <md-tab id="tab1" aria-controls="tab1-content">Trades</md-tab>
+    <md-tab id="tab2" aria-controls="tab2-content">Orders</md-tab>
+    <md-tab id="tab3" aria-controls="tab3-content">Positions</md-tab>
+    <md-tab id="tab4" aria-controls="tab4-content">Exposure</md-tab>
+    <md-tab id="tab5" aria-controls="tab5-content">Activity</md-tab>
+    <md-tab id="tab6" aria-controls="tab6-content">News</md-tab>
+    <md-tab id="tab7" aria-controls="tab7-content">Plugins</md-tab>
+</md-tabs>
+<ng-switch on="$ctrl.tabSelectedIndex" class="tabpanel-container" layout-margin>
+    <div role="tabpanel"
+         id="tab1-content"
+         aria-labelledby="tab1"
+         ng-switch-when="0"
+         md-swipe-left="$ctrl.next()"
+         md-swipe-right="$ctrl.previous()">
+
+        <trades></trades>
+    </div>
+
+    <div role="tabpanel"
+         id="tab2-content"
+         aria-labelledby="tab2"
+         ng-switch-when="1"
+         md-swipe-left="$ctrl.next()"
+         md-swipe-right="$ctrl.previous()">
+
+        <orders></orders>
+    </div>
+
+    <div role="tabpanel"
+         id="tab3-content"
+         aria-labelledby="tab3"
+         ng-switch-when="2"
+         md-swipe-left="$ctrl.next()"
+         md-swipe-right="$ctrl.previous()">
+
+        <positions></positions>
+    </div>
+
+    <div role="tabpanel"
+         id="tab4-content"
+         aria-labelledby="tab4"
+         ng-switch-when="3"
+         md-swipe-left="$ctrl.next()"
+         md-swipe-right="$ctrl.previous()">
+
+        <exposure></exposure>
+    </div>
+
+    <div role="tabpanel"
+         id="tab5-content"
+         aria-labelledby="tab5"
+         ng-switch-when="4"
+         md-swipe-left="$ctrl.next()"
+         md-swipe-right="$ctrl.previous()">
+
+         <activity></activity>
+    </div>
+
+    <div role="tabpanel"
+         id="tab6-content"
+         aria-labelledby="tab6"
+         ng-switch-when="5"
+         md-swipe-left="$ctrl.next()"
+         md-swipe-right="$ctrl.previous()">
+
+        <news></news>
+    </div>
+
+    <div role="tabpanel"
+         id="tab7-content"
+         aria-labelledby="tab7"
+         ng-switch-when="6"
+         md-swipe-left="$ctrl.next()"
+         md-swipe-right="$ctrl.previous()">
+
+        <plugins></plugins>
+    </div>
+
+</ng-switch>
+
+<div layout="row" layout-sm="column" layout-md="column" layout-padding>
+    <div layout="column" flex-gt-md="25" flex-sm="95">
+        <account></account>
+        <quotes></quotes>
+    </div>
+    <div layout="column" flex-gt-md="75" hide-sm>
+        <charts></charts>
+    </div>
+</div>

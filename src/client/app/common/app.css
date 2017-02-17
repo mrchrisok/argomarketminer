@@ -1,0 +1,39 @@
+body {
+    font-family: "Arimo", serif;
+}
+
+.logo {
+    height: 64px;
+}
+
+.tabpanel-container {
+    display: block;
+    margin-top: 20px;
+}
+
+.tabpanel-container md-content {
+    height: 135px;
+}
+
+div[ui-view="quotes"] md-content {
+    height: 250px;
+}
+
+span[flex], b[flex], a[flex] {
+    text-align: right;
+}
+
+.highlight-red {
+    color: red;
+}
+
+.highlight-green {
+    color: green;
+}
+
+span {
+    -webkit-animation: 0.5s linear all;
+       -moz-animation: 0.5s linear all;
+         -o-animation: 0.5s linear all;
+            animation: 0.5s linear all;
+}
