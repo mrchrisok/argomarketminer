@@ -1,7 +1,7 @@
 # ARGOMARKETMINER
 
-[![NPM version](https://badge.fury.io/js/argo-trading.png)](http://badge.fury.io/js/argo-trading)
-[![Build Status](https://travis-ci.org/albertosantini/argo.png)](https://travis-ci.org/albertosantini/argo)
+[![GitHub version](https://badge.fury.io/gh/mrchrisok%2Fargomarketminer.png)](https://badge.fury.io/gh/mrchrisok%2Fargomarketminer)
+[![Build Status](https://travis-ci.org/mrchrisok/argomarketminer.svg?branch=master)](https://travis-ci.org/mrchrisok/argomarketminer)
 
 **ARGOMARKETMINER** is an open source trading platform, connecting directly with [OANDA][]
 through the powerful [API][] to develop trading strategies. **ARGOMARKETMINER** is a TypeScript implementation of
