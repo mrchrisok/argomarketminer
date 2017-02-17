@@ -1,29 +1,29 @@
 "use strict";
 
-const electron = require("electron");
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+// const electron = require("electron");
+// const app = electron.app;
+// const BrowserWindow = electron.BrowserWindow;
 
-let mainWindow;
+// let mainWindow;
 
-function createWindow() {
-    mainWindow = new BrowserWindow({
-        frame: false,
-        height: 800,
-        icon: "src/client/img/favicon.ico",
-        width: 1450,
-        webPreferences: {
-            nodeIntegration: false
-        }
-    });
+// function createWindow() {
+//     mainWindow = new BrowserWindow({
+//         frame: false,
+//         height: 800,
+//         icon: "src/client/img/favicon.ico",
+//         width: 1450,
+//         webPreferences: {
+//             nodeIntegration: false
+//         }
+//     });
 
-    mainWindow.loadURL("http://localhost:8000");
+//     mainWindow.loadURL("http://localhost:8000");
 
-    mainWindow.on("closed", () => {
-        mainWindow = null;
-    });
-}
+//     mainWindow.on("closed", () => {
+//         mainWindow = null;
+//     });
+// }
 
 require("./src/server/app");
 
-app.on("ready", createWindow);
+// app.on("ready", createWindow);

@@ -1,64 +1,64 @@
 {
-    "name": "argomarketminer",
-    "description": "TypeScript/HTML5 interface for the OANDA platform",
-    "version": "1.0.0",
-    "main": "./main.js",
-    "bin": {
-        "argomarketminer": "./bin/argomarketminer",
-        "argomarketminer-standalone": "./bin/argomarketminer-standalone"
-    },
-    "preferGlobal": true,
-    "repository": "git@github.com:mrchrisok/argomarketminer.git",
-    "keywords": [
-        "trading",
-        "forex",
-        "fxtrade",
-        "oanda"
-    ],
-    "author": "O. Christopher Okonkwo",
-    "license": "MIT",
-    "engines": {
-        "node": ">=6"
-    },
-    "dependencies": {
-        "async": "~2.1.4",
-        "body-parser": "~1.16.1",
-        "express": "~4.14.1",
-        "faye-websocket": "~0.11.1",
-        "flic": "~1.3.7",
-        "limiter": "~1.1.0",
-        "request": "~2.79.0",
-
-        "angular": "~1.6.2",
-        "angular-animate": "~1.6.2",
-        "angular-aria": "~1.6.2",
-        "angular-messages": "~1.6.2",
-        "angular-mocks": "~1.6.2",
-        "angular-material": "~1.1.3",
-        "d3": "~4.5.0",
-        "techan": "~0.8.0"
-    },
-    "optionalDependencies": {
-        "electron": "~1.4.15"
-    },
-    "scripts": {
-        "test": "npm run lint && npm run karma",
-        "start": "node src/server/app.js",
-        "debug": "node --inspect src/server/app.js",
-        "electron": "electron .",
-        "lint": "eslint main.js karma.conf.js src/**/*.js",
-        "karma": "karma start --single-run",
-        "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
-    },
-    "devDependencies": {
-        "conventional-changelog-cli": "^1.2.0",
-        "eslint": "^3.15.0",
-        "eslint-plugin-angular": "^1.6.1",
-        "mocha": "^3.2.0",
-        "chai": "^3.5.0",
-        "karma": "^1.4.1",
-        "karma-mocha": "^1.3.0",
-        "karma-chai": "^0.1.0",
-        "karma-chrome-launcher": "^2.0.0"
-    }
+  "name": "argomarketminer",
+  "description": "TypeScript/HTML5 interface for the OANDA platform",
+  "version": "1.0.0",
+  "main": "./main.js",
+  "bin": {
+    "argomarketminer": "./bin/argomarketminer",
+    "argomarketminer-standalone": "./bin/argomarketminer-standalone"
+  },
+  "preferGlobal": true,
+  "repository": "git@github.com:mrchrisok/argomarketminer.git",
+  "keywords": [
+    "trading",
+    "forex",
+    "fxtrade",
+    "oanda"
+  ],
+  "author": "O. Christopher Okonkwo",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6"
+  },
+  "dependencies": {
+    "@types/express": "^4.0.35",
+    "angular": "~1.6.2",
+    "angular-animate": "~1.6.2",
+    "angular-aria": "~1.6.2",
+    "angular-material": "~1.1.3",
+    "angular-messages": "~1.6.2",
+    "angular-mocks": "~1.6.2",
+    "async": "~2.1.4",
+    "body-parser": "~1.16.1",
+    "d3": "~4.5.0",
+    "express": "~4.14.1",
+    "faye-websocket": "~0.11.1",
+    "flic": "~1.3.7",
+    "limiter": "~1.1.0",
+    "request": "~2.79.0",
+    "techan": "~0.8.0"
+  },
+  "optionalDependencies": {
+    "electron": "~1.4.15"
+  },
+  "scripts": {
+    "test": "npm run lint && npm run karma",
+    "start": "node src/server/app.js",
+    "debug": "node --inspect src/server/app.js",
+    "electron": "electron .",
+    "lint": "eslint main.js karma.conf.js src/**/*.js",
+    "karma": "karma start --single-run",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+  },
+  "devDependencies": {
+    "conventional-changelog-cli": "^1.2.0",
+    "eslint": "^3.15.0",
+    "eslint-plugin-angular": "^1.6.1",
+    "mocha": "^3.2.0",
+    "chai": "^3.5.0",
+    "karma": "^1.4.1",
+    "karma-mocha": "^1.3.0",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.0.0"
+  }
 }
