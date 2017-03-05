@@ -1,13 +1,10 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "removeComments": false,
         "preserveConstEnums": true,
-        "target": "ES5",
+        "target": "ES6",
         "sourceMap": true
-        // "typeRoots": [
-        //     "node_modules/@types/"
-        // ]
     }
-}
+}  

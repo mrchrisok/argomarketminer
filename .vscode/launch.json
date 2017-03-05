@@ -8,16 +8,18 @@
             "type": "node",
             "request": "launch",
             "name": "Debug - Main",
-            "program": "${workspaceRoot}\\main.js",
+            "program": "${workspaceRoot}/main.ts",
             "cwd": "${workspaceRoot}",
-            "stopOnEntry": true,
-            "sourceMaps": false
+            "outFiles": ["${workspaceRoot}/**/*.js"],
+            "sourceMaps": true,
+            "stopOnEntry": false
         },
         {
             "type": "node",
             "request": "attach",
             "name": "Attach to Process",
-            "port": 5858
+            "port": 5858,
+            "outFiles": []
         }
     ]
 }
