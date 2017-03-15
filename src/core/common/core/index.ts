@@ -1,3 +1,4 @@
+export * from "./entitybase";
 export * from "./loggers";
 export * from "./notificationobject";
 export * from "./objectbase";
