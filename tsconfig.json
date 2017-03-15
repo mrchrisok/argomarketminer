@@ -1,18 +1,25 @@
 {
-    "compilerOptions": {
-        "declaration": false,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "isolatedModules": false,
-        "jsx": "react",
-        "moduleResolution": "node",
-        "noImplicitAny": false,
-        "noUnusedParameters": false,
-        "noUnusedLocals": true,
-        "noLib": false,
-        "preserveConstEnums": true,
-        "removeComments": true,
-        "sourceMap": true,
-        "suppressImplicitAnyIndexErrors": true
-    }
+   "compilerOptions": {
+      "declaration": false,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "isolatedModules": false,
+      "jsx": "react",
+      "lib": [
+         "es6",
+         "dom"
+      ],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "noImplicitAny": false,
+      "noUnusedParameters": true,
+      "noUnusedLocals": true,
+      "noLib": false,
+      "preserveConstEnums": true,
+      "removeComments": true,
+      "sourceMap": true,
+      "suppressImplicitAnyIndexErrors": true,
+      "strictNullChecks": true,
+      "target": "ES6"
+   }
 }

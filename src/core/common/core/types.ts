@@ -1,0 +1,12 @@
+export type booleanN = boolean | null;
+export type booleanNU = boolean | null | undefined;
+export type DateN = Date | null;
+export type DateNU = Date | null | undefined;
+export type DateSN = Date | string| null;
+export type DateSNU = Date | string | null | undefined;
+export type NumberDex<T> = { [key: number]: T };
+export type numberN = number | null;
+export type numberNU = number | null | undefined;
+export type StringDex<T> = { [key: string]: T };
+export type stringN = string | null;
+export type stringNU = string | null | undefined;

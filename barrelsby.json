@@ -1,0 +1,13 @@
+{
+   "directory": "src/",
+   "delete": true,
+   "location": "branch",
+   "name": "index",
+   "structure": "filesystem",
+   "verbose": true,
+   "include": [
+      "src/**/*.ts"
+   ],
+   "exclude": [
+   ]
+}

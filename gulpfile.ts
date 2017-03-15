@@ -25,7 +25,7 @@ gulp.task("lintTS", () => {
 
     return gulp.src([
         "src/**/**.ts",
-        "test/**/**.spec.ts",
+        "src/test/**/**.spec.ts",
         "gulpfile.ts"
     ])
         .pipe(tslint(config))
@@ -66,20 +66,20 @@ gulp.task("build-solution", () =>
         .pipe(gulp.dest("."))
 );
 
-const tsClient = tsc.createProject("src/client/tsconfig.json");
+const tsWeb = tsc.createProject("src/apps/www/tsconfig.json");
 
-gulp.task("build-client", () =>
+gulp.task("build-www", () =>
     gulp.src([
         "typings/**.ts",
-        "src/client/**/**.ts"
+        "src/apps/www/**/**.ts"
     ])
         .pipe(sourcemaps.init())
-        .pipe(tsClient()).js
+        .pipe(tsWeb()).js
         .on("error", err => {
-            throw new Error(`Build failed for client .ts files: ${err}`);
+            throw new Error(`Build failed for www .ts files: ${err}`);
         })
         .pipe(sourcemaps.write("."))
-        .pipe(gulp.dest("src/client"))
+        .pipe(gulp.dest("src/apps/www/"))
 );
 
 const tsServer = tsc.createProject("src/server/tsconfig.json");
@@ -87,7 +87,8 @@ const tsServer = tsc.createProject("src/server/tsconfig.json");
 gulp.task("build-server", () =>
     gulp.src([
         "typings/**.ts",
-        "src/server/**/**.ts"
+        "src/**/**.ts",
+        "!src/apps/www*/**/*"
     ])
         .pipe(sourcemaps.init())
         .pipe(tsServer()).js
@@ -114,7 +115,7 @@ gulp.task("build-test", () =>
 );
 
 gulp.task("build", callback => {
-    runSequence(["build-solution", "build-client", "build-server", "build-test"], callback);
+    runSequence(["build-solution", "build-www", "build-server", "build-test"], callback);
 });
 
 
@@ -152,8 +153,8 @@ gulp.task("coverage", ["test"], () =>
 // *****************************************************************************
 gulp.task("bundle", () => {
 
-    const libraryName = "client";
-    const mainTsFilePath = "src/client/app/root.module.js";
+    const libraryName = "argo";
+    const mainTsFilePath = "src/apps/www/argo/app/root.module.js";
     const outputFolder = "dist/";
     const outputFileName = `${libraryName}.min.js`;
 

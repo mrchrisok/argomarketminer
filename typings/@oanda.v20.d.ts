@@ -204,13 +204,22 @@ declare module "@oanda/v20/context" {
     import * as user from "@oanda/v20/user";
 
     class Response {
+        constructor(
+            method: string,
+            path: string,
+            statusCode: string,
+            statusMessage: string,
+            contentType: string,
+            rawBody: {[key: string]: string}
+        );
+
         method: string;
         path: string;
         statusCode: string;
         statusMessage: string;
         contentType: string;
-        rawBody: {};
-        body: {};
+        rawBody: {[key: string]: string};
+        body: {[key: string]: any};
 
         isSuccess(): boolean;
         isRedirection(): boolean;
@@ -220,6 +229,13 @@ declare module "@oanda/v20/context" {
     }
 
     class Context {
+        constructor(
+            hostname: string,
+            port: number,
+            ssl: boolean,
+            application: string
+        );
+
         application: string;
         username: string;
         hostname: string;
@@ -849,6 +865,7 @@ declare module "@oanda/v20/pricing" {
         instrument: string;
         time: Date;
         status: string;
+        tradeable: boolean;
         bids: PriceBucket[];
         asks: PriceBucket[];
         closeoutBid: number;

@@ -23,6 +23,10 @@
 //     });
 // }
 
-require("./src/server/app");
+// start express server
+require("./src/apps/server/app");
+
+// start algorithms
+require("./src/apps/algorithm/app");
 
 // app.on("ready", createWindow);
