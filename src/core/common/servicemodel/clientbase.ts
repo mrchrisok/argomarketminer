@@ -21,24 +21,21 @@ export class ClientBase implements IDisposable {
    private _headers: StringDex<string> = {};
 
    Get(options: RequestOptions, callback: request.RequestCallback | undefined): request.Request {
-      options.method = "GET";
       options.json = true;
       options.url = `${this._url}${options.url}`;
-      return request(options, callback);
+      return request.get(options, callback);
    }
 
    Post(options: RequestOptions, callback: request.RequestCallback | undefined): request.Request {
-      options.method = "POST";
       options.json = true;
       options.url = `${this._url}${options.url}`;
-      return request(options, callback);
+      return request.post(options, callback);
    }
 
    Patch(options: RequestOptions, callback: request.RequestCallback | undefined): request.Request {
-      options.method = "PATCH";
       options.json = true;
       options.url = `${this._url}${options.url}`;
-      return request(options, callback);
+      return request.patch(options, callback);
    }
 
    GetResponseHandler(callback: (body: any) => void): request.RequestCallback {

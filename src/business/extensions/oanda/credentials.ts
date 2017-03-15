@@ -1,4 +1,3 @@
-
 export class Credentials {
     public environment: string;
     public token: string;

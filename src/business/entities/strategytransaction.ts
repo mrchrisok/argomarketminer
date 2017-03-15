@@ -1,52 +1,41 @@
-﻿using MarketMiner.Common.Contracts;
-using N.Core.Common.Core;
-using P.Core.Common.Contracts;
-using System;
-using System.Runtime.Serialization;
+﻿import { EntityBase, IIdentifiableEntity, DateSN, numberN } from "../../core";
+import { ITransaction } from "../../common/index";
 
-namespace MarketMiner.Business.Entities
-{
-   [DataContract]
-   public class StrategyTransaction : EntityBase, IIdentifiableEntity, ITransaction
-   {
-      [DataMember]
-      public int StrategyTransactionID { get; set; }
-      [DataMember]
-      public int StrategyID { get; set; }
-      [DataMember]
-      public int BrokerID { get; set; }
-      [DataMember]
-      public string AccountID { get; set; }
-      [DataMember]
-      public string BrokerTransactionID { get; set; }
-      [DataMember]
-      public string BrokerOrderID { get; set; }
-      [DataMember]
-      public string BrokerTradeID { get; set; }
-      [DataMember]
-      public string Instrument { get; set; }
-      [DataMember]
-      public string Type { get; set; }
-      [DataMember]
-      public DateTime? Time { get; set; }
-      [DataMember]
-      public string Side { get; set; }
-      [DataMember]
-      public double Price { get; set; }
-      [DataMember]
-      public double? TakeProfit { get; set; }
-      [DataMember]
-      public double? StopLoss { get; set; }
+//[DataContract]
+export class StrategyTransaction extends EntityBase implements IIdentifiableEntity, ITransaction {
+   // [DataMember]
+   StrategyTransactionID: number;
+   // [DataMember]
+   StrategyID: number;
+   // [DataMember]
+   BrokerID: number;
+   // [DataMember]
+   AccountID: string;
+   // [DataMember]
+   BrokerTransactionID: string;
+   // [DataMember]
+   BrokerOrderID: string;
+   // [DataMember]
+   BrokerTradeID: string;
+   // [DataMember]
+   Instrument: string;
+   // [DataMember]
+   Type: string;
+   // [DataMember]
+   Time: DateSN;
+   // [DataMember]
+   Side: string;
+   // [DataMember]
+   Price: number;
+   // [DataMember]
+   TakeProfit: numberN;
+   // [DataMember]
+   StopLoss: numberN;
 
-      public virtual Strategy Strategy { get; set; }
-      public virtual Broker Broker { get; set; }
+   // public virtual Strategy Strategy
+   // public virtual Broker Broker
 
-      #region Members.IIdentifiableEntity
-      int IIdentifiableEntity.EntityID
-      {
-         get { return StrategyTransactionID; }
-         set { StrategyTransactionID = value; }
-      }
-      #endregion
-   }
+   // IIdentifiableEntity
+   get EntityID() { return this.StrategyTransactionID; }
+   set EntityID(value) { this.StrategyTransactionID = value; }
 }
