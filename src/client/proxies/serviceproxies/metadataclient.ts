@@ -1,138 +1,124 @@
-﻿using MarketMiner.Client.Contracts;
-using MarketMiner.Client.Entities;
-using N.Core.Common.ServiceModel;
-using P.Core.Common.Meta;
-using System;
-using System.ComponentModel.Composition;
-using System.Threading.Tasks;
+﻿import { ClientBase } from "../../../core/common/servicemodel/index";
+import { IConfiguration, ILogger } from "../../../core/index";
+import "reflect-metadata";
+import { inject, injectable } from "inversify/dts/inversify";
+import { IMetadataService } from "../../index";
+import { MetaResource, MetaLookup, MetaSetting } from "../../../core/common/meta/index";
 
-namespace MarketMiner.Client.Proxies
-{
-   [Export(typeof(IMetadataService))]
-   [PartCreationPolicy(CreationPolicy.NonShared)]
-   public class MetadataClient : UserClientBase<IMetadataService>, IMetadataService
-   {
-      #region Operations
-      public void ClearCache()
-      {
-         Channel.ClearCache();
-      }
+@injectable()
+export class MetadataClient extends ClientBase implements IMetadataService {
+   constructor(
+      @inject("AppConfig") _config: IConfiguration,
+      @inject("") logger: ILogger
+   ) {
+      super(_config, "IMetadataService");
+      this._logger = logger;
+   }
 
-      public void ClearCacheItem(string key)
-      {
-         Channel.ClearCacheItem(key);
-      }
+   async ClearCacheAsync(): Promise<boolean> {
+      let result;
+      const options = { url: "ClearCache" }
+      function callback(body: any): void { result = body.result; }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return result as boolean;
+   }
 
-      public void ClearCacheSets(string[] entitySets)
-      {
-         Channel.ClearCacheSets(entitySets);
-      }
+   async ClearCacheItemAsync(key: string): Promise<boolean> {
+      let result;
+      const body = { key: key };
+      const options = { url: "ClearCacheItem", body: body }
+      function callback(body: any): void { result = body.result; }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return result as boolean;
+   }
 
-      public MetaSetting GetSetting(string type, string code, bool enabledOnly = true)
-      {
-         return Channel.GetSetting(type, code, enabledOnly);
-      }
+   async ClearCacheSetsAsync(entitySets: string[]): Promise<boolean> {
+      let result;
+      const body = { entitySets: JSON.stringify(entitySets) };
+      const options = { url: "ClearCacheSets", body: body } 
+      function callback(body: any): void { result = body.result; }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return result as boolean;
+   }
 
-      public MetaSetting[] GetSettings(string type, bool enabledOnly = true)
-      {
-         return Channel.GetSettings(type, enabledOnly);
-      }
-      public MetaLookup GetLookup(string type, string code, bool enabled = true)
-      {
-         return Channel.GetLookup(type, code, enabled);
-      }
+   async GetSettingAsync(type: string, code: string, enabledOnly: boolean = true): Promise<MetaSetting> {
+      let setting;
+      const body = { type: type, code: code, enabledOnly: enabledOnly };
+      const options = { url: "GetSetting", body: body }
+      function callback(body: any): void { setting = Object.assign(new MetaSetting(), body); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return setting as MetaSetting;
+   }
 
-      public MetaLookup[] GetLookups(string type, bool enabledOnly = true)
-      {
-         return Channel.GetLookups(type, enabledOnly);
-      }
+   async GetSettingsAsync(type: string, enabledOnly: boolean = true): Promise<MetaSetting[]> {
+      let settings;
+      const body = { type: type, enabledOnly: enabledOnly };
+      const options = { url: "GetSettings", body: body }
+      function callback(body: any): void { settings = body.map(x => Object.assign(new MetaSetting(), x)); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return settings as MetaSetting[];
+   }
 
-      public MetaResource GetResource(string set, string type, string key, string cultureCode = "en-US", bool enabled = true)
-      {
-         return Channel.GetResource(set, type, key, cultureCode, enabled);
-      }
+   async GetLookupAsync(type: string, code: string, enabled: boolean = true): Promise<MetaLookup> {
+      let lookup;
+      const body = { type: type, code: code, enabled: enabled };
+      const options = { url: "GetLookup", body: body }
+      function callback(body: any): void { lookup = Object.assign(new MetaLookup(), body); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return lookup as MetaLookup;
+   }
 
-      public MetaResource[] GetResources(string set, bool enabledOnly = true)
-      {
-         return Channel.GetResources(set, enabledOnly);
-      }
+   async GetLookupsAsync(type: string, enabledOnly: boolean = true): Promise<MetaLookup[]> {
+      let lookups;
+      const body = { type: type, enabledOnly: enabledOnly };
+      const options = { url: "GetLookups", body: body }
+      function callback(body: any): void { lookups = body.map(x => Object.assign(new MetaLookup(), x)); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return lookups as MetaLookup[];
+   }
 
-      public MetaResource[] GetResourcesByType(string set, string type, bool enabledOnly = true)
-      {
-         return Channel.GetResourcesByType(set, type, enabledOnly);
-      }
+   async GetResourceAsync(set: string, type: string, key: string, cultureCode: string = "en-US", enabled: boolean = true): Promise<MetaResource> {
+      let resource;
+      const body = { set: set, type: type, key: key, cultureCode: cultureCode, enabled: enabled };
+      const options = { url: "GetResource", body: body }
+      function callback(body: any): void { resource = Object.assign(new MetaResource(), body); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return resource as MetaResource;
+   }
 
-      public MetaResource[] GetResourcesByCulture(string set, string cultureCode = "en-US", bool enabledOnly = true)
-      {
-         return Channel.GetResourcesByCulture(set, cultureCode, enabledOnly);
-      }
+   async GetResourcesAsync(set: string, enabledOnly: boolean = true): Promise<MetaResource[]> {
+      let resources;
+      const body = { set: set, enabledOnly: enabledOnly };
+      const options = { url: "GetResources", body: body }
+      function callback(body: any): void { resources = body.map(x => Object.assign(new MetaResource(), x)); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return resources as MetaResource[];
+   }
 
-      public MetaResource[] GetResourcesByTypeAndCulture(string set, string type, string cultureCode = "en-US", bool enabledOnly = true)
-      {
-         return Channel.GetResourcesByTypeAndCulture(set, type, cultureCode, enabledOnly);
-      }
-      #endregion
+   async GetResourcesByTypeAsync(set: string, type: string, enabledOnly: boolean = true): Promise<MetaResource[]> {
+      let resources;
+      const body = { set: set, type: type, enabledOnly: enabledOnly };
+      const options = { url: "GetResourcesByType", body: body }
+      function callback(body: any): void { resources = body.map(x => Object.assign(new MetaResource(), x)); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return resources as MetaResource[];
+   }
 
-      #region Operations.Async
-      public async Task ClearCacheAsync()
-      {
-         await Channel.ClearCacheAsync();
-      }
+   async GetResourcesByCultureAsync(set: string, cultureCode: string = "en-US", enabledOnly: boolean = true): Promise<MetaResource[]> {
+      let resources;
+      const body = { set: set, cultureCode: cultureCode, enabledOnly: enabledOnly };
+      const options = { url: "GetResourcesByCulture", body: body }
+      function callback(body: any): void { resources = body.map(x => Object.assign(new MetaResource(), x)); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return resources as MetaResource[];
+   }
 
-      public async Task ClearCacheItemAsync(string key)
-      {
-         await Channel.ClearCacheItemAsync(key);
-      }
-
-      public async Task ClearCacheSetsAsync(string[] entitySets)
-      {
-         await Channel.ClearCacheSetsAsync(entitySets);
-      }
-
-      public async Task<MetaSetting> GetSettingAsync(string type, string code, bool enabledOnly = true)
-      {
-         return await Channel.GetSettingAsync(type, code, enabledOnly);
-      }
-
-      public async Task<MetaSetting[]> GetSettingsAsync(string type, bool enabledOnly = true)
-      {
-         return await Channel.GetSettingsAsync(type, enabledOnly);
-      }
-
-      public async Task<MetaLookup> GetLookupAsync(string type, string code, bool enabled = true)
-      {
-         return await Channel.GetLookupAsync(type, code, enabled);
-      }
-
-      public async Task<MetaLookup[]> GetLookupsAsync(string type, bool enabledOnly = true)
-      {
-         return await Channel.GetLookupsAsync(type, enabledOnly);
-      }
-
-      public async Task<MetaResource> GetResourceAsync(string set, string type, string key, string cultureCode = "en-US", bool enabled = true)
-      {
-         return await Channel.GetResourceAsync(set, type, key, cultureCode, enabled);
-      }
-
-      public async Task<MetaResource[]> GetResourcesAsync(string set, bool enabledOnly = true)
-      {
-         return await Channel.GetResourcesAsync(set, enabledOnly);
-      }
-
-      public async Task<MetaResource[]> GetResourcesByTypeAsync(string set, string type, bool enabledOnly = true)
-      {
-         return await Channel.GetResourcesByTypeAsync(set, type, enabledOnly);
-      }
-
-      public async Task<MetaResource[]> GetResourcesByCultureAsync(string set, string cultureCode = "en-US", bool enabledOnly = true)
-      {
-         return await Channel.GetResourcesByCultureAsync(set, cultureCode, enabledOnly);
-      }
-
-      public async Task<MetaResource[]> GetResourcesByTypeAndCultureAsync(string set, string type, string cultureCode = "en-US", bool enabledOnly = true)
-      {
-         return await Channel.GetResourcesByTypeAndCultureAsync(set, type, cultureCode, enabledOnly);
-      }
-      #endregion
+   async GetResourcesByTypeAndCultureAsync(set: string, type: string, cultureCode: string = "en-US", enabledOnly: boolean = true): Promise<MetaResource[]> {
+      let resources;
+      const body = { set: set, type: type, cultureCode: cultureCode, enabledOnly: enabledOnly };
+      const options = { url: "GetResourcesByTypeAndCulture", body: body }
+      function callback(body: any): void { resources = body.map(x => Object.assign(new MetaResource(), x)); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return resources as MetaResource[];
    }
 }

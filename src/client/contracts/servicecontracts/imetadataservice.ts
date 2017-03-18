@@ -2,9 +2,9 @@
 import { IServiceContract } from "../../../core/index";
 
 export interface IMetadataService extends IServiceContract {
-   ClearCacheAsync(): Promise<void>;
-   ClearCacheItemAsync(key): Promise<void>;
-   ClearCacheSetsAsync(entitySets: string[]): Promise<void>;
+   ClearCacheAsync(): Promise<boolean>;
+   ClearCacheItemAsync(key): Promise<boolean>;
+   ClearCacheSetsAsync(entitySets: string[]): Promise<boolean>;
    GetSettingAsync(type: string, code: string, enabledOnly: boolean): Promise<MetaSetting>;
    GetSettingsAsync(type, enabledOnly: boolean): Promise<MetaSetting[]>;
    GetLookupAsync(type, code: string, enabled: boolean): Promise<MetaLookup>;

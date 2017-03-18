@@ -10,7 +10,8 @@ import * as plugin from "./plugin";
 const server: express.Express = express(),
       port: number = routes.config.port,
       staticFiles: any = express.static,
-      apiUrl: string = routes.config.apiUrl;
+      apiUrl: string = routes.config.apiUrl,
+      mmsUrl: string = routes.config.mmsUrl;
 
 process.on("uncaughtException", err => {
       util.log(err);
@@ -19,6 +20,7 @@ process.on("uncaughtException", err => {
 server.use(staticFiles(routes.config.staticFiles));
 server.use("/node_modules", staticFiles(routes.config.vendorFiles));
 server.use(apiUrl, routes.apis);
+server.use(mmsUrl, routes.mms);
 
 server.listen(port, () => {
       util.log(`Argo listening on http://localhost:${port}`);

@@ -1,87 +1,90 @@
-import * as ce from "../../entities";
+import * as e from "../../entities";
 import { ServiceCaller } from "./servicecaller";
 import { IStrategyService } from "../../contracts";
-import { DateN } from "../../../core/common/core";
 //
 
 export class StrategyCaller extends ServiceCaller {
 
    static Instance(): StrategyCaller { return new StrategyCaller(); }
 
-   private _strategyResult: ce.Strategy;
-   private _algorithmInstanceResult: ce.AlgorithmInstance;
-   private _algorithmMessageResult: ce.AlgorithmMessage;
-   private _transactionResult: ce.StrategyTransaction;
-
-   private _parameterResults: ce.AlgorithmParameter[];
-   private _transactionResults: ce.StrategyTransaction[];
+   private _strategyResult: e.Strategy;
+   private _algorithmInstanceResult: e.AlgorithmInstance;
+   private _algorithmMessageResult: e.AlgorithmMessage;
+   private _transactionResult: e.StrategyTransaction;
+   private _transactionResults: e.StrategyTransaction[];
+   private _parameterResults: e.AlgorithmParameter[];
    //
 
-   //    async PostAlgorithmStatusNotificationAsync(message: string): Promise<void> {
-   //       await WithStrategyClientAsync(async strategyClient => {
-   //          await strategyClient.PostAlgorithmStatusNotificationAsync(message);
-   //       });
-   //    }
+   async PostAlgorithmStatusNotificationAsync(message: string): Promise<void> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         await strategyClient.PostAlgorithmStatusNotificationAsync(message);
+      });
+   }
 
-   //    async GetAlgorithmParametersAsync(strategyId: number): Promise<AlgorithmParameter[]> {
-   //       await WithStrategyClientAsync(async strategyClient => {
-   //          _parameterResults = await strategyClient.GetAlgorithmParametersAsync(strategyId);
-   //       });
-   //       return _parameterResults;
-   //    }
+   async GetAlgorithmParametersAsync(strategyId: number): Promise<e.AlgorithmParameter[]> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         this._parameterResults = await strategyClient.GetAlgorithmParametersAsync(strategyId);
+      });
+      return this._parameterResults;
+   }
 
-   //    public async Task<AlgorithmInstance> UpdateAlgorithmInstanceAsync(AlgorithmInstance instance) {
-   //       await WithStrategyClientAsync(async strategyClient => {
-   //          _algorithmInstanceResult = await strategyClient.UpdateAlgorithmInstanceAsync(instance);
-   //       });
-   //       return _algorithmInstanceResult;
-   //    }
+   async GetStrategyAsync(strategyId: number): Promise<e.Strategy> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         this._strategyResult = await strategyClient.GetStrategyAsync(strategyId);
+      });
+      return this._strategyResult;
+   }
 
-   //    public async Task<AlgorithmMessage> UpdateAlgorithmMessageAsync(AlgorithmMessage message) {
-   //       await WithStrategyClientAsync(async strategyClient => {
-   //          _algorithmMessageResult = await strategyClient.UpdateAlgorithmMessageAsync(message);
-   //       });
-   //       return _algorithmMessageResult;
-   //    }
+   async UpdateAlgorithmInstanceAsync(instance: e.AlgorithmInstance): Promise<e.AlgorithmInstance> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         this._algorithmInstanceResult = await strategyClient.UpdateAlgorithmInstanceAsync(instance);
+      });
+      return this._algorithmInstanceResult;
+   }
 
-   //    public async Task<StrategyTransaction> GetStrategyTransactionAsync(int transactionId) {
-   //       await WithStrategyClientAsync(async strategyClient => {
-   //          _transactionResult = await strategyClient.GetStrategyTransactionAsync(transactionId);
-   //       });
-   //       return _transactionResult;
-   //    }
+   async UpdateAlgorithmMessageAsync(message: e.AlgorithmMessage): Promise<e.AlgorithmMessage> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         this._algorithmMessageResult = await strategyClient.UpdateAlgorithmMessageAsync(message);
+      });
+      return this._algorithmMessageResult;
+   }
 
-   //    public async Task<StrategyTransaction> SaveStrategyTransactionAsync(StrategyTransaction transaction, string brokerName) {
-   //       await WithStrategyClientAsync(async strategyClient => {
-   //          _transactionResult = await strategyClient.SaveStrategyTransactionAsync(transaction, brokerName);
-   //       });
-   //       return _transactionResult;
-   //    }
+   async GetStrategyTransactionAsync(transactionId: number): Promise<e.StrategyTransaction> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         this._transactionResult = await strategyClient.GetStrategyTransactionAsync(transactionId);
+      });
+      return this._transactionResult;
+   }
 
-   //    public async Task<StrategyTransaction> UpdateStrategyTransactionAsync(StrategyTransaction transaction) {
-   //       await WithStrategyClientAsync(async strategyClient => {
-   //          _transactionResult = await strategyClient.UpdateStrategyTransactionAsync(transaction);
-   //       });
-   //       return _transactionResult;
-   //    }
+   async SaveStrategyTransactionAsync(transaction: e.StrategyTransaction, brokerName: string): Promise<e.StrategyTransaction> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         this._transactionResult = await strategyClient.SaveStrategyTransactionAsync(transaction, brokerName);
+      });
+      return this._transactionResult;
+   }
 
-   //    public async Task<StrategyTransaction[] > GetStrategyTransactionsAsync(int ? count, bool ? descending)
-   // {
-   //    await WithStrategyClientAsync(async strategyClient => {
-   //       _transactionResults = await strategyClient.GetStrategyTransactionsAsync(count, descending);
-   //    });
-   //    return _transactionResults;
-   // }
+   async UpdateStrategyTransactionAsync(transaction: e.StrategyTransaction): Promise<e.StrategyTransaction> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         this._transactionResult = await strategyClient.UpdateStrategyTransactionAsync(transaction);
+      });
+      return this._transactionResult;
+   }
 
-   //       public async Task< StrategyTransaction[] > GetStrategyTransactionsCollectionAsync(int entryStrategyTransactionId)
-   // {
-   //    await WithStrategyClientAsync(async strategyClient => {
-   //       _transactionResults = await strategyClient.GetStrategyTransactionsCollectionAsync(entryStrategyTransactionId);
-   //    });
-   //    return _transactionResults;
-   // }
+   async GetStrategyTransactionsAsync(count?: number, descending?: boolean): Promise<e.StrategyTransaction[]> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         this._transactionResults = await strategyClient.GetStrategyTransactionsAsync(count, descending);
+      });
+      return this._transactionResults;
+   }
 
-   async GetStrategyTransactionsByDateRangeAsync(dateBottom: Date, dateTop: DateN, maxTransactions: number): Promise<ce.StrategyTransaction[]> {
+   async  GetStrategyTransactionsCollectionAsync(entryStrategyTransactionId: number): Promise<e.StrategyTransaction[]> {
+      await this.WithStrategyClientAsync(async strategyClient => {
+         this._transactionResults = await strategyClient.GetStrategyTransactionsCollectionAsync(entryStrategyTransactionId);
+      });
+      return this._transactionResults;
+   }
+
+   async GetStrategyTransactionsByDateRangeAsync(dateBottom: Date, dateTop: Date, maxTransactions: number): Promise<e.StrategyTransaction[]> {
       await this.WithStrategyClientAsync(async strategyClient => {
          this._transactionResults = await strategyClient.GetStrategyTransactionsByDateRangeAsync(dateBottom, dateTop, maxTransactions);
       });

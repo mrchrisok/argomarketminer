@@ -12,6 +12,6 @@ export abstract class ServiceCaller {
       // dispose the proxy
       const disposableClient: IDisposable = proxy as IDisposable;
       if (disposableClient != null)
-         disposableClient.dispose();
+         disposableClient.Dispose();
    }
 }

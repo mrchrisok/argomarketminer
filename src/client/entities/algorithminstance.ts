@@ -26,7 +26,7 @@ export class AlgorithmInstance extends core.ObjectBase {
   }
 
   get Status(): core.numberN { return this._status; }
-  set Status(value: number | null) {
+  set Status(value: core.numberN) {
     if (this._status != value) {
       this._status = value; this.OnPropertyChanged(value);
     }

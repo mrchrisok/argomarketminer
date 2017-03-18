@@ -1,37 +1,34 @@
-﻿using N.Core.Common.ServiceModel;
-using System.ComponentModel.Composition;
-using System.Threading.Tasks;
-using MarketMiner.Client.Entities;
-using MarketMiner.Client.Contracts;
+﻿import { ClientBase } from "../../../core/common/servicemodel/index";
+import { IConfiguration, ILogger } from "../../../core/index";
+import { Account } from "../../entities";
+import "reflect-metadata";
+import { inject, injectable } from "inversify/dts/inversify";
+import { IAccountService } from "../../index";
 
-namespace MarketMiner.Client.Proxies
-{
-   [Export(typeof(IAccountService))]  // MefDI: interface mapping
-   [PartCreationPolicy(CreationPolicy.NonShared)] // MEfDI: non-singleton
-   public class AccountClient : UserClientBase<IAccountService>, IAccountService
-   {
-      #region Operations
-      public Account GetAccount(string loginEmail)
-      {
-         return Channel.GetAccount(loginEmail);
-      }
+@injectable()
+export class AccountClient extends ClientBase implements IAccountService {
+   constructor(
+      @inject("AppConfig") _config: IConfiguration,
+      @inject("") logger: ILogger
+   ) {
+      super(_config, "IMetadataService");
+      this._logger = logger;
+   }
 
-      public Account UpdateAccount(Account account)
-      {
-         return Channel.UpdateAccount(account);
-      }
-      #endregion
+   async GetAccountAsync(loginEmail: string): Promise<Account> {
+      let account;
+      const body = { loginEmail: loginEmail };
+      const options = { url: "GetAccount", body: body }
+      function callback(body: any): void { account = Object.assign(new Account(), body); }
+      await this.Get(options, this.GetResponseHandler(callback));
+      return account as Account;
+   }
 
-      #region Operations.Async
-      public Task<Account> GetAccountAsync(string loginEmail)
-      {
-         return Channel.GetAccountAsync(loginEmail);
-      }
-
-      public Task<Account> UpdateAccountAsync(Account account)
-      {
-         return Channel.UpdateAccountAsync(account);
-      }
-      #endregion
+   async UpdateAccountAsync(account: Account): Promise<Account> {
+      const body = { account: JSON.stringify(account) };
+      const options = { url: "UpdateAccount", body: body }
+      function callback(body: any): void { account = Object.assign(account, body); }
+      await this.Patch(options, this.GetResponseHandler(callback));
+      return account;
    }
 }
